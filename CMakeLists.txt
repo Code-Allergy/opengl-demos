@@ -3,6 +3,7 @@ cmake_minimum_required (VERSION 3.10)
 project (Samples)
 
 find_package(OpenGL REQUIRED)
+set (CMAKE_CXX_STANDARD 11)
 
 if( CMAKE_BINARY_DIR STREQUAL CMAKE_SOURCE_DIR )
     message( FATAL_ERROR "Please select another Build Directory ! (and give it a clever name, like bin_Visual2012_64bits/)" )
@@ -151,5 +152,18 @@ target_link_libraries(demo07_cube_random_colours_cycling
 add_custom_command(
    TARGET demo07_cube_random_colours_cycling POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo07_cube_random_colours_cycling${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo07_cube_random_colours_cycling/"
+)
+############################################################################
+# Demo 8: cube_texture_bmp
+############################################################################
+add_executable(demo08_cube_texture_bmp
+    demo08_cube_texture_bmp/demo08.cpp
+)
+target_link_libraries(demo08_cube_texture_bmp
+    ${ALL_LIBS}
+)
+add_custom_command(
+    TARGET demo08_cube_texture_bmp POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo08_cube_texture_bmp${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo08_cube_texture_bmp/"
 )
 ############################################################################
