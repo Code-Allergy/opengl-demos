@@ -146,3 +146,18 @@ add_custom_command(
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo06_cube_random_colours${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo06_cube_random_colours/"
 )
 ############################################################################
+# Demo 7: cube_random_colours_cycling
+############################################################################
+add_executable(demo07_cube_random_colours_cycling
+    demo07_cube_random_colours_cycling/demo07.cpp
+    common/shader.cpp
+    common/shader.hpp
+)
+target_link_libraries(demo07_cube_random_colours_cycling
+    ${ALL_LIBS}
+)
+add_custom_command(
+   TARGET demo07_cube_random_colours_cycling POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo07_cube_random_colours_cycling${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo07_cube_random_colours_cycling/"
+)
+############################################################################
