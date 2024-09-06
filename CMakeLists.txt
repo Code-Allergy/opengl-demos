@@ -167,3 +167,16 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo08_cube_texture_bmp${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo08_cube_texture_bmp/"
 )
 ############################################################################
+# Demo 9: cube_texture_dds
+############################################################################
+add_executable(demo09_cube_texture_dds
+    demo09_cube_texture_dds/demo09.cpp
+)
+target_link_libraries(demo09_cube_texture_dds
+    ${ALL_LIBS}
+)
+add_custom_command(
+    TARGET demo09_cube_texture_dds POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo09_cube_texture_dds${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo09_cube_texture_dds/"
+)
+############################################################################
