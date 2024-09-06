@@ -34,15 +34,32 @@ pkgs.mkShell {
           demo_folder=$(find . -maxdepth 1 -type d -name "demo''${padded_num}_*" | head -n 1)
 
           if [ -z "$demo_folder" ]; then
-            echo "Error: No demo folder found for number $1"
-            return 1
+            echo "No demo folder found for number $1"
+            return 2
           fi
 
           folder_name=$(basename "$demo_folder")
 
           if [ -x "$demo_folder/$folder_name" ]; then
-            echo "Running $folder_name"
-            cd "$demo_folder" && ./$folder_name && cd ..
+            if [[ $# -eq 2 && "$2" =~ ^[0-9]+$ ]]; then
+              echo "Running $folder_name for $2 seconds"
+              cd "$demo_folder" || return 1
+              ./$folder_name $2 &
+              pid=$!
+              sleep $2
+              kill $pid > /dev/null 2>&1
+              wait $pid > /dev/null 2>&1
+              # verify it closed, if it does not, use kill -9
+              if ps -p $pid > /dev/null; then
+                kill -9 $pid
+              fi
+              cd ..
+            else
+              echo "Running $folder_name"
+              cd "$demo_folder" || return 1
+              ./$folder_name
+              cd .. || return 1
+            fi
           else
             echo "Error: Binary $folder_name not found or not executable in $demo_folder"
             return 1
@@ -50,8 +67,33 @@ pkgs.mkShell {
         }
 
         function brun() {
-          build && run "$1"
+          build && run "$1" "$2"
         }
+
+        function run_all_demos() {
+          local demo_duration=''${1:-10}  # Default to 10 seconds if no argument is provided
+          local demo_number=0
+          local exit_code=0
+
+          while [ $exit_code -ne 2 ]; do
+              echo "Running demo $demo_number"
+
+              # Start the demo
+              run $demo_number $demo_duration
+
+              exit_code=$?
+
+              if [ $exit_code -eq 2 ]; then
+                  echo "All demos have been run."
+                  break
+              elif [ $exit_code -ne 0 ]; then
+                  echo "Error occurred while running demo $demo_number. Stopping."
+                  break
+              fi
+
+              ((demo_number++))
+          done
+      }
 
         function gen-demo() {
           padded_num=$(printf "%02d" "$1")
