@@ -206,3 +206,29 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo11_cube_keyboard_mouse_capped_vangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo11_cube_keyboard_mouse_capped_vangle/"
 )
 ############################################################################
+# Demo 12: cube_spinning
+############################################################################
+add_executable(demo12_cube_spinning
+    demo12_cube_spinning/demo12.cpp
+)
+target_link_libraries(demo12_cube_spinning
+    ${ALL_LIBS}
+)
+add_custom_command(
+    TARGET demo12_cube_spinning POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo12_cube_spinning${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo12_cube_spinning/"
+)
+############################################################################
+# Demo 13: cube_spinning_double
+############################################################################
+add_executable(demo13_cube_spinning_double
+    demo13_cube_spinning_double/demo13.cpp
+)
+target_link_libraries(demo13_cube_spinning_double
+    ${ALL_LIBS}
+)
+add_custom_command(
+    TARGET demo13_cube_spinning_double POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo13_cube_spinning_double${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo13_cube_spinning_double/"
+)
+############################################################################
