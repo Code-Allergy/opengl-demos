@@ -232,3 +232,16 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo13_cube_spinning_double${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo13_cube_spinning_double/"
 )
 ############################################################################
+# Demo 14: cube_camera_rotation_fixed
+############################################################################
+add_executable(demo14_cube_camera_rotation_fixed
+    demo14_cube_camera_rotation_fixed/demo14.cpp
+)
+target_link_libraries(demo14_cube_camera_rotation_fixed
+    ${ALL_LIBS}
+)
+add_custom_command(
+    TARGET demo14_cube_camera_rotation_fixed POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo14_cube_camera_rotation_fixed${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo14_cube_camera_rotation_fixed/"
+)
+############################################################################
