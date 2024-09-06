@@ -99,3 +99,20 @@ add_custom_command(
    TARGET demo03_triangle_transformations_ortho POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo03_triangle_transformations_ortho${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo03_triangle_transformations_ortho/"
 )
+
+############################################################################
+# Demo 4: cube
+############################################################################
+add_executable(demo04_cube
+    demo04_cube/demo04.cpp
+    common/shader.cpp
+    common/shader.hpp
+)
+target_link_libraries(demo04_cube
+    ${ALL_LIBS}
+)
+add_custom_command(
+   TARGET demo04_cube POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo04_cube${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo04_cube/"
+)
+############################################################################
