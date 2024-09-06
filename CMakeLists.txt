@@ -1,6 +1,6 @@
 # CMake entry point
 cmake_minimum_required (VERSION 3.10)
-project (Tutorials)
+project (Samples)
 
 find_package(OpenGL REQUIRED)
 
@@ -41,31 +41,46 @@ add_definitions(
 	-DGLEW_STATIC
 	-D_CRT_SECURE_NO_WARNINGS
 )
+#############################################
+### 		  START OF DEMOS			  ###
+#############################################
 
-# # Demo 00 - Create a basic window. (Tutorial 01)
+# Demo 0: Create a basic window. (Tutorial 01)
 add_executable(demo00_first_window
     demo00_first_window/demo00.cpp
 )
 target_link_libraries(demo00_first_window
-	${ALL_LIBS}
+    ${ALL_LIBS}
+)
+add_custom_command(
+   TARGET demo00_first_window POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo00_first_window${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo00_first_window/"
 )
 
-# # Demo 01 - Create a red triangle covering most of the screen. (Tutorial 01)
+# Demo 1: Create a red triangle covering most of the screen. (Tutorial 02)
 add_executable(demo01_triangle
     demo01_triangle/demo01.cpp
 	common/shader.cpp
 	common/shader.hpp
 )
 target_link_libraries(demo01_triangle
-	${ALL_LIBS}
+    ${ALL_LIBS}
 )
-
-add_custom_command(
-   TARGET demo00_first_window POST_BUILD
-   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo00_first_window${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo00_first_window/"
-)
-
 add_custom_command(
    TARGET demo01_triangle POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo01_triangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo01_triangle/"
+)
+
+# Demo 2: Create a red triangle, and apply a matrix transformation to it (Tutorial 03)
+add_executable(demo02_triangle_transformations
+    demo02_triangle_transformations/demo02.cpp
+	common/shader.cpp
+	common/shader.hpp
+)
+target_link_libraries(demo02_triangle_transformations
+    ${ALL_LIBS}
+)
+add_custom_command(
+   TARGET demo02_triangle_transformations POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo02_triangle_transformations${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo02_triangle_transformations/"
 )

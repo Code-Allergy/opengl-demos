@@ -11,3 +11,7 @@ Thumbs.db
 OpenGL-tutorial_v*
 **.mtl
 .DS_Store
+
+demo00_first_window/demo00_first_window
+demo01_triangle/demo01_triangle
+demo02_triangle_transformations/demo02_triangle_transformations
