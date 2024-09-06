@@ -7,6 +7,16 @@
 
 alias build="mkdir -p build && cd build && cmake .. && make all -j$(nproc) && cd .."
 
+function demo_exists() {
+  padded_num=$(printf "%02d" "$1")
+  demo_folder=$(find . -maxdepth 1 -type d -name "demo${padded_num}_*" | head -n 1)
+  if [ -z "$demo_folder" ]; then
+    return 1;
+  else
+    return 0;
+  fi
+}
+
 function run() {
   if [ ! -d "build" ]; then
     echo "Please build project first"
@@ -18,14 +28,15 @@ function run() {
       return 1
   fi
 
-  padded_num=$(printf "%02d" "$1")
+  demo_exists $1
 
-  demo_folder=$(find . -maxdepth 1 -type d -name "demo${padded_num}_*" | head -n 1)
-
-  if [ -z "$demo_folder" ]; then
+  if [ $? -ne 0 ]; then
     echo "No demo folder found for number $1"
     return 2
   fi
+
+  padded_num=$(printf "%02d" "$1")
+  demo_folder=$(find . -maxdepth 1 -type d -name "demo${padded_num}_*" | head -n 1)
 
   folder_name=$(basename "$demo_folder")
 
@@ -115,4 +126,22 @@ add_custom_command(
 ############################################################################
 -------------------COPY HERE------------------------
 EOF
+}
+
+# THis is very primative for the time being.
+function snapshot() {
+  # Get latest demo ID + 1
+  local current_demo=0
+  while [ $? -eq 0 ]; do
+    current_demo=$((current_demo+1))
+    demo_exists $current_demo
+  done
+
+  gen-demo $current_demo $1
+  padded_num=$(printf "%02d" "$current_demo")
+  folder_name="demo${padded_num}_${1}"
+  
+  # copy entire contents of playground to demo folder
+  cp -rf playground/* $folder_name
+  mv $folder_name/main.cpp $folder_name/demo${padded_num}.cpp
 }

@@ -48,10 +48,23 @@ add_definitions(
 	-DGLEW_STATIC
 	-D_CRT_SECURE_NO_WARNINGS
 )
+
+## PLAYGROUND
+# Create new variants in playground, then snapshot them into demos with the snapshot bash function.
+add_executable(playground
+    playground/main.cpp
+)
+target_link_libraries(playground
+    ${ALL_LIBS}
+)
+add_custom_command(
+   TARGET playground POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/playground${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/playground/"
+)
+
 #############################################
 ### 		  START OF DEMOS			  ###
 #############################################
-
 # Demo 0: Create a basic window. (Tutorial 01)
 add_executable(demo00_first_window
     demo00_first_window/demo00.cpp
