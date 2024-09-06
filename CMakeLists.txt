@@ -116,3 +116,18 @@ add_custom_command(
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo04_cube${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo04_cube/"
 )
 ############################################################################
+# Demo 5: A cube and a triangle rendered at the same time, with two different MVP matrices
+############################################################################
+add_executable(demo05_cube_triangle
+demo05_cube_triangle/demo05.cpp
+common/shader.cpp
+common/shader.hpp
+)
+target_link_libraries(demo05_cube_triangle
+${ALL_LIBS}
+)
+add_custom_command(
+TARGET demo05_cube_triangle POST_BUILD
+COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo05_cube_triangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo05_cube_triangle/"
+)
+############################################################################
