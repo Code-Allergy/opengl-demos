@@ -16,7 +16,7 @@ using namespace glm;
 
 
 
-#include <common/shader.hpp>
+#include <libdemo.hpp>
 
 
 

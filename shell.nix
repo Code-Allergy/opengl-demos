@@ -73,8 +73,6 @@ pkgs.mkShell {
     ############################################################################
     add_executable($demo_name
         $demo_name/demo''${padded_num}.cpp
-        common/shader.cpp
-        common/shader.hpp
     )
     target_link_libraries($demo_name
         \''${ALL_LIBS}

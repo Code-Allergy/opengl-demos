@@ -18,6 +18,10 @@ endif()
 # Compile external dependencies 
 add_subdirectory (external)
 
+
+# compile libdemo
+add_subdirectory (lib)
+
 include_directories(
 	external/AntTweakBar-1.16/include/
 	external/glfw-3.1.2/include/
@@ -25,6 +29,7 @@ include_directories(
 	external/glew-1.13.0/include/
 	external/assimp-3.0.1270/include/
 	external/bullet-2.81-rev2613/src/
+    lib/
 	.
 )
 
@@ -32,6 +37,7 @@ set(ALL_LIBS
 	${OPENGL_LIBRARY}
 	glfw
 	GLEW_1130
+	demo
 )
 
 add_definitions(
@@ -60,8 +66,6 @@ add_custom_command(
 # Demo 1: Create a red triangle covering most of the screen. (Tutorial 02)
 add_executable(demo01_triangle
     demo01_triangle/demo01.cpp
-	common/shader.cpp
-	common/shader.hpp
 )
 target_link_libraries(demo01_triangle
     ${ALL_LIBS}
@@ -74,8 +78,6 @@ add_custom_command(
 # Demo 2: Create a red triangle, and apply a matrix transformation to it (Tutorial 03)
 add_executable(demo02_triangle_transformations
     demo02_triangle_transformations/demo02.cpp
-	common/shader.cpp
-	common/shader.hpp
 )
 target_link_libraries(demo02_triangle_transformations
     ${ALL_LIBS}
@@ -89,8 +91,6 @@ add_custom_command(
 ############################################################################
 add_executable(demo03_triangle_transformations_ortho
     demo03_triangle_transformations_ortho/demo03.cpp
-    common/shader.cpp
-    common/shader.hpp
 )
 target_link_libraries(demo03_triangle_transformations_ortho
     ${ALL_LIBS}
@@ -105,8 +105,6 @@ add_custom_command(
 ############################################################################
 add_executable(demo04_cube
     demo04_cube/demo04.cpp
-    common/shader.cpp
-    common/shader.hpp
 )
 target_link_libraries(demo04_cube
     ${ALL_LIBS}
@@ -120,8 +118,6 @@ add_custom_command(
 ############################################################################
 add_executable(demo05_cube_triangle
 demo05_cube_triangle/demo05.cpp
-common/shader.cpp
-common/shader.hpp
 )
 target_link_libraries(demo05_cube_triangle
 ${ALL_LIBS}
@@ -135,8 +131,6 @@ COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR
 ############################################################################
 add_executable(demo06_cube_random_colours
     demo06_cube_random_colours/demo06.cpp
-    common/shader.cpp
-    common/shader.hpp
 )
 target_link_libraries(demo06_cube_random_colours
     ${ALL_LIBS}
@@ -150,8 +144,6 @@ add_custom_command(
 ############################################################################
 add_executable(demo07_cube_random_colours_cycling
     demo07_cube_random_colours_cycling/demo07.cpp
-    common/shader.cpp
-    common/shader.hpp
 )
 target_link_libraries(demo07_cube_random_colours_cycling
     ${ALL_LIBS}
