@@ -193,3 +193,16 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo10_cube_keyboard_mouse${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo10_cube_keyboard_mouse/"
 )
 ############################################################################
+# Demo 11: cube_keyboard_mouse_capped_vangle
+############################################################################
+add_executable(demo11_cube_keyboard_mouse_capped_vangle
+    demo11_cube_keyboard_mouse_capped_vangle/demo11.cpp
+)
+target_link_libraries(demo11_cube_keyboard_mouse_capped_vangle
+    ${ALL_LIBS}
+)
+add_custom_command(
+    TARGET demo11_cube_keyboard_mouse_capped_vangle POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo11_cube_keyboard_mouse_capped_vangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo11_cube_keyboard_mouse_capped_vangle/"
+)
+############################################################################
