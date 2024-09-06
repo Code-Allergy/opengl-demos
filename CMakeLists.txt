@@ -131,3 +131,18 @@ TARGET demo05_cube_triangle POST_BUILD
 COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo05_cube_triangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo05_cube_triangle/"
 )
 ############################################################################
+# Demo 6: A cube with random colours, generated at runtime on each run.
+############################################################################
+add_executable(demo06_cube_random_colours
+    demo06_cube_random_colours/demo06.cpp
+    common/shader.cpp
+    common/shader.hpp
+)
+target_link_libraries(demo06_cube_random_colours
+    ${ALL_LIBS}
+)
+add_custom_command(
+   TARGET demo06_cube_random_colours POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/demo06_cube_random_colours${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/demo06_cube_random_colours/"
+)
+############################################################################
